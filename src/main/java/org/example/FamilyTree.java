@@ -34,15 +34,27 @@ public class FamilyTree {
         } else {
             System.out.println("Invalid person names. Make sure both names exist in the family tree.");
         }
-        System.out.println(getFamilyTree());
     }
 
     public void countSons(String name) {
         int count = 0;
 
         Person person = familyTree.get(name);
-        if (person != null && person.getRelationships().containsKey("son")) {
-            List<Person> people = person.getRelationships().get("son");
+        if (person != null && person.getRelationships().containsKey("father")) {
+            List<Person> people = person.getRelationships().get("father");
+            for(Person person1 : people) {
+                Map<String, List<Person>> map = familyTree.get(person1.getName()).getRelationships();
+                if(map.containsKey("son")) {
+                    List<Person> personList = map.get("son");
+                    for(Person personn : personList) {
+                        if(personn.getName().equals(name)) count++;
+                    }
+                }
+            }
+        }
+
+        if (person != null && person.getRelationships().containsKey("mother")) {
+            List<Person> people = person.getRelationships().get("mother");
             for(Person person1 : people) {
                 Map<String, List<Person>> map = familyTree.get(person1.getName()).getRelationships();
                 if(map.containsKey("son")) {
@@ -62,8 +74,21 @@ public class FamilyTree {
         int count = 0;
 
         Person person = familyTree.get(name);
-        if (person != null && person.getRelationships().containsKey("daughter")) {
-            List<Person> people = person.getRelationships().get("daughter");
+        if (person != null && person.getRelationships().containsKey("father")) {
+            List<Person> people = person.getRelationships().get("father");
+            for(Person person1 : people) {
+                Map<String, List<Person>> map = familyTree.get(person1.getName()).getRelationships();
+                if(map.containsKey("daughter")) {
+                    List<Person> personList = map.get("daughter");
+                    for(Person personn : personList) {
+                        if(personn.getName().equals(name)) count++;
+                    }
+                }
+            }
+        }
+
+        if (person != null && person.getRelationships().containsKey("mother")) {
+            List<Person> people = person.getRelationships().get("mother");
             for(Person person1 : people) {
                 Map<String, List<Person>> map = familyTree.get(person1.getName()).getRelationships();
                 if(map.containsKey("son")) {
@@ -104,17 +129,5 @@ public class FamilyTree {
             return people.size();
         }
         return 0;
-    }
-
-    public Map<String, Person> getFamilyTree() {
-        System.out.println("--------------------------------------------------------");
-        for (Map.Entry<String,Person> entry : familyTree.entrySet()) {
-            String key = entry.getKey();
-            Person person = entry.getValue();
-            System.out.println("Key = " + key);
-            person.getRelationTree();
-        }
-        System.out.println("--------------------------------------------------------");
-        return familyTree;
     }
 }

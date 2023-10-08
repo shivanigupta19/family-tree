@@ -26,19 +26,5 @@ public class Person {
     public Map<String, List<Person>> getRelationships() {
         return relationships;
     }
-
-    public Map<String, List<Person>> getRelationTree() {
-        for (Map.Entry<String,List<Person>> entry : relationships.entrySet()) {
-            System.out.println("********");
-            System.out.print(entry.getKey() + " _____________ ");
-            for(Person person : entry.getValue()) {
-                System.out.print(person.getName() + " ");
-            }
-            System.out.println("____________");
-            System.out.println("********");
-        }
-
-        return relationships;
-    }
 }
 

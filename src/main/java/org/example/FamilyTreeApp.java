@@ -118,6 +118,5 @@ public class FamilyTreeApp {
 // count sons of RamKrishna
 // count daughter of RamKrishna
 // count wives of RamKrishna
-// count sons of RamKrishna
 
 // father of Sanjeev
